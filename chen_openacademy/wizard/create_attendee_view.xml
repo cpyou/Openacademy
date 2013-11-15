@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!--the following code can't render-->
+        <record model="ir.ui.view" id="create_attendee_wizard_form_view">
+            <field name="name">openacademy.create.attendee.wizard.form</field>
+            <field name="model">openacademy.create.attendee.wizard</field>
+          <!--   <field name="type">form</field> -->
+            <field name="arch" type="xml">
+                <form string="Attendee wizard" version="7.0" col="4">
+                    <group colspan="2">
+                        <field name="session_id" colspan="2" />
+                    </group>
+                    <field name="attendee_ids" nolabel="1" colspan="4">
+                        <tree string="Attendees" editable="bottom">
+                            <field name="partner_id" />
+                        </tree>
+                    </field>
+                    <footer>
+                        <button type="special" special="cancel"
+                             string="Cancel" icon="gtk-cancel" />
+                        <button type="object" name="action_add_attendee"
+                             string="Add attendees" icon="gtk-ok" 
+                             confirm="Are you sure want to add those attendees?" />
+                    </footer>
+                </form>
+            </field>
+        </record> 
+        <record model="ir.actions.act_window" id="create_attendee_wizard_action">
+            <field name="name">Add attendee</field>
+            <field name="res_model">openacademy.create.attendee.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Add attendee" parent="openacademy_menu_main"
+            id="create_attendee_wizard_menu"
+            action="create_attendee_wizard_action" />
+    </data>
+</openerp>
