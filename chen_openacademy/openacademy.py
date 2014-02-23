@@ -116,8 +116,16 @@ class session(orm.Model):
             _get_attendee_count, type='integer', string='attendee Count'),
     }
 
-    _default = {
+    _defaults = {
+        # You can give a function or a lambda for default value. Openerp will
+        # automatically call it and get its return value at each record
+        # creation. 'today' is a method of the object 'date' of module 'fields'
+        # that returns -in the right timezone- the current date in the OpenERP
+        # format
         'start_date': fields.date.today,
+        # Beware that is not the same as :
+        # 'start_date': fields.date.today(),
+        # which actually call the method at Openerp startup!
         'active': True,
     }
 

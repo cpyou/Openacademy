@@ -35,7 +35,11 @@
             <field name="name">session.tree</field>
             <field name="model">openacademy.session</field>
             <field name="arch" type="xml">
-                <tree string="Session Tree">
+                <!--Colors are separated by semi-colons ';' and look like this:
+                    colorValue!:condition1;colorValue2:condition2;...
+            -->
+                <tree string="Session Tree"
+                    colors="#0000ff:duration&lt;5;red:duration&gt;15">
                     <field name="name" />
                     <field name="course_id" />
                     <field name="duration" invisible="1" />
