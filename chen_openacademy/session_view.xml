@@ -88,11 +88,46 @@
                 </graph>
             </field>
         </record>
+        <!--session's kanban view-->
+        <record model="ir.ui.view" id="openacadeny_session_kanban_view">
+            <field name="name">openacademy.session.kanban</field>
+            <field name="model">openacademy.session</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="course_id">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <!--this isn't perfect-->
+                            <div >
+                                <div class="oe_dropdown_kanban">
+                                    <!-- dropdown menu -->
+                                    <div class="oe_dropdown_toggle">
+                                        <span class="oe_e">í</span>
+                                        <ul class="oe_dropdown_menu">
+                                            <li><a type="delete">Delete</a></li>
+                                            <li><ul class="oe_kanban_colorpicker" data-field="color" /></li>
+                                        </ul>
+                                    </div>
+                                    <div class="oe_clear"></div>
+                                </div>
+                                <div t-attf-class="oe_kanban_context">
+                                    <!--title-->
+                                    Session name:<field name="name" /><br/>
+                                    Start date :<field name="start_date" /><br/>
+                                    duration :<field name="duration" />
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <record model="ir.actions.act_window" id="session_list_action">
             <field name="name">sessions</field>
             <field name="res_model">openacademy.session</field>
             <field name='view_type'>form</field>
-            <field name="view_mode">tree,form,calendar,gantt</field>
+            <field name="view_mode">tree,form,calendar,gantt,kanban</field>
         </record>
         <menuitem id="openacademy_session_menu" name="sessions" parent="openacademy_menu_main" action="session_list_action"/>
     </data>
