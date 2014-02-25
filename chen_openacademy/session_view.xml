@@ -27,6 +27,15 @@
                             <field name="partner_id" />
                         </tree>
                     </field>
+                    <field name="state" />
+                    <group>
+                        <button string="Confirm" type="object" name="action_confirm"
+                            states="draft" />
+                        <button string="Mark as done" type="object" name="action_done"
+                            states="confirmed" />
+                        <button string="Reset to draft" type="object" name="action_draft"
+                            states="confirmed,done" />
+                    </group>
     			</form>
     		</field>
     	</record>

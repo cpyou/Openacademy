@@ -94,6 +94,18 @@ class session(orm.Model):
             }
         return res
 
+    def action_draft(self, cr, uid, ids, context=None):
+        # set to "draft" state
+        return self.write(cr, uid, ids, {'state': 'draft'}, context=context)
+
+    def action_confirm(self, cr, uid, ids, context=None):
+        # set to "confirmed" state
+        return self.write(cr, uid, ids, {'state': 'confirmed'}, context=context)
+
+    def action_done(self, cr, uid, ids, context=None):
+        # set to "done" state
+        return self.write(cr, uid, ids, {'state': 'done'}, context=context)
+
     _columns = {
         'name': fields.char(string="Name", size=256, required=True),
         'start_date': fields.date(string="Start date"),
@@ -101,6 +113,10 @@ class session(orm.Model):
                                  help="Duration in days"),
         'seats': fields.float(string="Number of seats"),
         'active': fields.boolean("Actice"),
+
+        'state': fields.selection(
+                     [('draft', 'Draft'), ('confirmed', 'Confirmed'), ('done', 'Done')],
+                     'State', readonly=True, required=True),
         'taken_seats_percent': fields.function(
             _taken_seats_percent, type="float", string="Taken Seats"),
         'instructor_id': fields.many2one(
@@ -127,6 +143,7 @@ class session(orm.Model):
         # 'start_date': fields.date.today(),
         # which actually call the method at Openerp startup!
         'active': True,
+        'state': 'draft',
     }
 
     def _check_instructor_not_in_attendees(self, cr, uid, ids, context=None):
