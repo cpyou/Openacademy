@@ -5,13 +5,13 @@ class create_attendee_wizard(osv.TransientModel):
     _name = 'openacademy.create.attendee.wizard'
 
     def action_add_attendee(self, cr, uid, ids, context=None):
-        attendee_model = self.pool.get('openacademy.attendee')
+        session_model = self.pool.get('openacademy.session')
         wizard = self.browse(cr, uid, ids[0], context=context)
-        for attendee in wizard.attendee_ids:
-            attendee_model.create(cr, uid, {
-                'partner_id': attendee.partner_id.id,
-                'session_id': wizard.session_id.id,
-            })
+        session_ids = [wizard.session_id.id]
+        att_data = [{'partner_id': att.partner_id.id for att in wizard.attendee_ids}]
+        session_model.write(cr, uid, session_ids,
+                            {'attendee_ids': [(0, 0, data) for data in att_data]},
+                            context=context)
         return {}
         #return {'type': 'ir.actions.act_window.close'}
 
