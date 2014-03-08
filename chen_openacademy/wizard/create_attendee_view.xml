@@ -24,6 +24,8 @@
                              string="Add attendees" icon="gtk-ok" 
                              confirm="Are you sure want to add those attendees?" />
                     </footer>
+                    <button string="Cancel" icon="gtk-cancel" special="cancel" />
+                    <button string="Add attendees" icon="gtk-ok" type="object" name="action_add_attendee" />
                 </form>
             </field>
         </record> 
