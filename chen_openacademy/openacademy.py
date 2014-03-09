@@ -20,7 +20,7 @@ class course(orm.Model):
         res = {}
         for course in self.browse(cr, uid, ids, context=context):
             num = 0
-            for course in course.session_ids:
+            for session in course.session_ids:
                 num += len(session.attendee_ids)
             res[course.id] = num
         return res
