@@ -10,7 +10,7 @@
             <field name="arch" type="xml">
                 <form string="Attendee wizard" version="7.0" col="4">
                     <group colspan="2">
-                        <field name="session_id" colspan="2" />
+                        <field name="session_ids" colspan="2" />
                     </group>
                     <field name="attendee_ids" nolabel="1" colspan="4">
                         <tree string="Attendees" editable="bottom">
@@ -36,6 +36,14 @@
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>
+        <!-- I don't known following what to done   -->
+        <act_window id="session_create_attendee_wizard"
+            name="Attendees"
+            src_model="openacademy.session"
+            res_model="openacademy.create.attendee.wizard"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi" />
 
         <menuitem name="Add attendee" parent="openacademy_menu_main"
             id="create_attendee_wizard_menu"
